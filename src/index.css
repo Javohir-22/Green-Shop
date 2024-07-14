@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Cerra-Regular";
+  src: url(./assets/Fonts/CeraPro-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Cerra-Medium";
+  src: url(./assets/Fonts/CeraPro-Medium.ttf);
+}
+
+@font-face {
+  font-family: "Cerra-Bold";
+  src: url(./assets/Fonts/CeraPro-Bold.ttf);
+}
+
+@font-face {
+  font-family: "Cerra-Black";
+  src: url(./assets/Fonts/CeraPro-Black.ttf);
+}
+
+@layer base {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    font-family: "Cerra-Regular";
+  }
+
+  .product:hover .btn-hover {
+    opacity: 1;
+    visibility: visible;
+    bottom: 60px;
+  }
+
+  .product:hover .line {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+}
+
+@layer utilities {
+  .font-rbold {
+    font-family: "Cerra-Bold";
+    font-weight: 700;
+  }
+
+  .font-rmedium {
+    font-family: "Cerra-Medium";
+    font-weight: 600;
+  }
+
+  .font-rblack {
+    font-family: "Cerra-Black";
+    font-weight: 900;
+  }
+
+  .primary-text {
+    color: #46a358;
+  }
+
+  .primary-bg {
+    background: #46a358;
+  }
+}
