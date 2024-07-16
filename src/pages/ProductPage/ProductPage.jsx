@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useCart } from "../../components/CardContext/CardContext";
-import LoadingProduct from "../LoadingProduct/LoadingProduct";
+import LoadingProduct from "../../components/LoadingProduct/LoadingProduct";
+import ProductAbout from "../../components/ProductAbout/ProductAbout";
+import ReletedProducts from "../../components/ReletedProducts/ReletedProducts";
+import Footer from "../../layout/Footer/Footer";
 
 const ProductPage = ({ setPage, count, setCount }) => {
   const { id } = useParams();
@@ -61,7 +64,7 @@ const ProductPage = ({ setPage, count, setCount }) => {
   }
 
   return (
-    <div className="product-page">
+    <div key={product.id} className="product-page">
       <h6 className="my-4">
         <Link className="font-rbold" to="/">
           Home
@@ -204,18 +207,27 @@ const ProductPage = ({ setPage, count, setCount }) => {
               XL
             </p>
           </div>
-          <div className="flex gap-4 my-3">
+          <div className="flex gap-4 my-4">
            <div className="flex items-center gap-4">
-           <p onClick={decreaseQuantity} className="primary-bg text-white w-8 h-10 text-lg cursor-pointer flex items-center justify-center font-rbold rounded-2xl">--</p>
+           <button onClick={decreaseQuantity} className="primary-bg text-white w-8 h-10 text-lg cursor-pointer flex items-center justify-center font-rbold rounded-2xl">--</button>
             <p className="text-lg w-3">{quantity}</p>
-            <p onClick={increaseQuantity} className="primary-bg text-white w-8 h-10 text-lg cursor-pointer flex items-center justify-center font-rbold rounded-2xl">+</p>
+            <button onClick={increaseQuantity} className="primary-bg text-white w-8 h-10 text-lg cursor-pointer flex items-center justify-center font-rbold rounded-2xl">+</button>
            </div>
-           <button className="primary-bg text-white w-36 h-10 text-sm cursor-pointer flex items-center justify-center font-rbold rounded-xl">BUY NOW</button>
+           <button className="primary-bg text-white w-36 h-10 text-sm cursor-no-drop flex items-center justify-center font-rbold rounded-xl opacity-70">BUY NOW</button>
            <button onClick={handleAddToCart} className="primary-text border border-green-600 w-36 h-10 text-sm cursor-pointer flex items-center justify-center font-rbold rounded-xl">ADD TO CART</button>
            <button onClick={() => setHeart(!heart)} className={`text-white border border-green-600 w-12 h-10 text-sm cursor-pointer flex items-center justify-center font-rbold rounded-xl ${heart ? "border-red-600" : ""}`}><img src={`/icons/${heart ? "bxs-" : ""}heart.svg`} alt="" /></button>
           </div>
+          <div className="flex flex-col gap-1">
+          <p>SKU:</p>
+          <p>Categories:</p>
+          <p>Tags:</p>
+          <p className="font-rbold">Share this product:</p>
+          </div>
         </div>
       </div>
+      <ProductAbout />
+      <ReletedProducts />
+      <Footer />
     </div>
   );
 };

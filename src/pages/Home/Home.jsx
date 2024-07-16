@@ -1,6 +1,7 @@
-import Header from "../../components/Header/Header";
+import Header from "../../layout/Header/Header";
 import ProductList from "../../components/ProductList/ProductList";
 import Category from "../../components/Category/Category";
+import Footer from "../../layout/Footer/Footer";
 
 const Home = ({ setCount, count, category, setCategory }) => {
   return (
@@ -10,6 +11,7 @@ const Home = ({ setCount, count, category, setCategory }) => {
         <Category category={category} setCategory={setCategory} />
         <ProductList setCount={setCount} count={count} />
       </div>
+      <Footer />
     </>
   );
 };

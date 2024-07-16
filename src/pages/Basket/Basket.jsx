@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useCart } from '../../components/CardContext/CardContext';
+import Footer from '../../layout/Footer/Footer';
 
 const Basket = ({ setCount }) => {
     const { cartItems, updateItemQuantity, removeItem } = useCart();
@@ -27,6 +28,7 @@ const Basket = ({ setCount }) => {
     setCount(cartItems.length);
 
     return (
+        <>
         <div className="cart">
             <h2>Корзина</h2>
             {cartItems.length === 0 ? (
@@ -46,6 +48,8 @@ const Basket = ({ setCount }) => {
                 </ul>
             )}
         </div>
+        <Footer />
+        </>
     );
 };
 
