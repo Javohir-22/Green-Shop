@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const ProductAbout = () => {
-  const [about, setAbout] = useState(false);
+  const [about, setAbout] = useState(true);
   return (
     <div className="mt-20 max-w-[1200px] w-full mb-28">
       <div className="flex items-center border-b py-4 gap-8 relative">

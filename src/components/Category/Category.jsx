@@ -1,7 +1,29 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 const Category = ({ category, setCategory }) => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://1034506f7a622249.mokky.dev/ads"
+        );
+        setData(response.data);
+      } catch (error) {
+        setError(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log(data);
   return (
-    <div className="max-w-[300px] w-full p-2.5 bg-[#FBFBFB]">
-      <h2>Categories</h2>
+    <div className="max-w-[300px] w-full  bg-[#FBFBFB]">
+      <h2 className="p-2.5">Categories</h2>
       <div className="flex flex-col gap-2 p-4 items-start">
         <button
           onClick={() => setCategory(0)}
@@ -39,6 +61,17 @@ const Category = ({ category, setCategory }) => {
         >
           Flowering plants
         </button>
+      </div>
+      <div>
+        {data.map((item) => (
+          <Link to={`/product/${item.fakeId}`}>
+            <div key={item.id} className="flex flex-col gap-2 p-4 items-center mt-8 bg-green-50">
+            <img src="/super-sale.png" alt="" />
+            <h2 className="text-2xl font-rbold">{item.text}</h2>
+            <img src={item.img} alt="img" />
+          </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

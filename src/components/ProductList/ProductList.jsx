@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useCart } from "../CardContext/CardContext";
+import Product from "../Product/Product";
 
 const ProductList = ({ setCount, count }) => {
+  const [category, setCategory] = useState(1);
   const [products, setProducts] = useState([]);
   const { addItem } = useCart();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -25,6 +27,20 @@ const ProductList = ({ setCount, count }) => {
 
     fetchProduct();
   }, []);
+
+  const sortOptions = (order) => {
+    const sortedOptions = [...products].sort((a, b) => {
+      if (order === 'asc') {
+        return a.price - b.price;
+      } else if (order === 'desc') {
+         return b.price - a.price;
+      }else {
+        return a.id - b.id;
+      }
+    });
+    setProducts(sortedOptions);
+  };
+
 
   if (loading) {
     return (
@@ -53,59 +69,32 @@ const ProductList = ({ setCount, count }) => {
   if (!products) {
     return <div>Продукт не найден</div>;
   }
-
   return (
-    <div className="">
-      <h2>Список товаров</h2>
-      <div className="flex flex-wrap gap-8 ">
+    <div className="max-w-[840px] w-full">
+      <div className="w-full mb-6 flex items-start justify-between">
+        <div className="relative flex gap-8 items-center pb-4">
+        <button onClick={() => setCategory(1)} className={`${category === 1 ? "primary-text font-rbold" : ""}`}>All Products</button>
+        <button onClick={() => setCategory(2)} className={`${category === 2 ? "primary-text font-rbold" : ""}`}>New Arrivals</button>
+        <button onClick={() => setCategory(3)} className={`${category === 3 ? "primary-text font-rbold" : ""}`}>Sale</button>
+        <div className={`absolute bottom-0 transition-all left-0 h-[3px] primary-bg ${category === 1 ? "w-[90px] " : category === 2 ? "w-24 translate-x-[120px]" : "w-8 translate-x-[244px]"}`}></div>
+        </div>
+        <div className="flex gap-1 items-center">
+          <h4>Sort by:</h4>
+        <select onChange={(e) => sortOptions(e.target.value)} className="outline-none" name="sort" id="sort">
+          <option value="default">Default sorting</option>
+          <option value="asc">Price: low to high</option>
+          <option value="desc">Price: high to low</option>
+        </select>
+        </div>
+      </div>
+      <div className="flex flex-wrap gap-6 ">
         {products.map((product) => (
-          <div
-            key={product.id}
-            className="product w-[270px] p-3 bg-[#FBFBFB] relative shadow "
-          >
-            <h3 className="primary-bg text-white font-rnormal absolute top-4 left-1 px-1">{product.superSale}</h3>
-            <Link to={`/product/${product.id}`}>
-              <div className="line absolute top-6 left-0 w-full h-0.5 invisible primary-bg opacity-0 transition-all"></div>
-              <img
-                className="w-[250px] h-[250px]"
-                src={product.img}
-                alt=""
-              />
-              <p className="w-full">{product.name} </p>
-              <div className="flex gap-4"> 
-              <h4 className="font-rbold text-lg primary-text">
-                ${product.price}.00
-              </h4>
-              <h4 className="font-rnormal text-lg opacity-60 line-through">
-                {product.oldPrice} 
-              </h4>
-              </div>
-            </Link>
-            <div className="btn-hover opacity-0 invisible bottom-0 absolute transition-all z-10 flex gap-4 items-center left-12">
-              <button
-                className=" p-2.5 shadow-md rounded-xl bg-slate-100 hover:shadow-inner hover:shadow-slate-300"
-                onClick={() => {
-                  addItem(product), setCount(count + 1);
-                }}
-              >
-                <img className="" src="/icons/basket.png" alt="" />
-              </button>
-              <Link to={`/product/${product.id}`}>
-                <button className=" p-3 shadow-md rounded-xl bg-slate-100 hover:shadow-inner hover:shadow-slate-300">
-                  <img className="w-5" src="/icons/search.png" alt="" />
-                </button>
-              </Link>
-              <Link to={`/product/${product.id}`}>
-                <button className=" p-2.5 shadow-md rounded-xl bg-slate-100 hover:shadow-inner hover:shadow-slate-300">
-                  <img
-                    className="opacity-80"
-                    src="/icons/bx-heart.svg"
-                    alt=""
-                  />
-                </button>
-              </Link>
-            </div>
-          </div>
+          <Product
+            setCount={setCount}
+            count={count}
+            addItem={addItem}
+            product={product}
+          />
         ))}
       </div>
     </div>

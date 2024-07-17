@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Cart from "./pages/Basket/Basket";
-import ProductPage from "./pages/ProductPage/ProductPage";
-import { CartProvider } from "./components/CardContext/CardContext";
-import Home from "./pages/Home/Home";
-import Navbar from "./layout/Navbar/Navbar";
-import { ROUTES } from "./utils/routes";
+import Cart from "../pages/Basket/Basket";
+import ProductPage from "../pages/ProductPage/ProductPage";
+import { CartProvider } from "../components/CardContext/CardContext";
+import Home from "../pages/Home/Home";
+import Navbar from "../layout/Navbar/Navbar";
+import { ROUTES } from "../utils/routes";
 
 function App() {
   const [count, setCount] = useState(0);

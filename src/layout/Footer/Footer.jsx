@@ -170,7 +170,7 @@ const Footer = () => {
       </div>
 
       <p className="text-slate-500 text-sm leading-7 p-4 mx-auto">
-        © 2021 GreenShop. All Rights Reserved.
+        © 2024 GreenShop. All Rights Reserved.
       </p>
     </div>
   );
