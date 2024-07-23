@@ -14,7 +14,7 @@ const ProductPage = ({ setPage, count, setCount }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [image, setImage] = useState(1);
-  const [size, setSize] = useState("s");
+  const [size, setSize] = useState("");
   const [heart, setHeart] = useState(false);
   const { addItem } = useCart();
 

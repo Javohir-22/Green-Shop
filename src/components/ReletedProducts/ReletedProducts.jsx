@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 
 import { Pagination } from "swiper/modules";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ReletedProducts = () => {
   const [data, setData] = useState([]);
@@ -41,9 +42,10 @@ const ReletedProducts = () => {
         {
           data.map((product) => (
             <SwiperSlide className="w-[220px] border ">
+              <Link to={`/product/${product.id}`}>
               <img className="w-full h-[255px]" src={product.img} alt="" />
               <p>{product.name}</p>
-              <h3 className="font-rbold primary-text"> ${product.price}</h3>
+              <h3 className="font-rbold primary-text"> ${product.price}</h3></Link>
             </SwiperSlide>
           ))
         }

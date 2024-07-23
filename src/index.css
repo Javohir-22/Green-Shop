@@ -59,6 +59,10 @@
     font-family: "Cerra-Medium";
     font-weight: 600;
   }
+  .font-rnormal {
+    font-family: "Cerra-Medium";
+    font-weight: 500;
+  }
 
   .font-rblack {
     font-family: "Cerra-Black";

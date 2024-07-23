@@ -20,7 +20,7 @@ const Category = ({ category, setCategory }) => {
 
     fetchData();
   }, []);
-  console.log(data);
+
   return (
     <div className="max-w-[300px] w-full  bg-[#FBFBFB]">
       <h2 className="p-2.5">Categories</h2>
